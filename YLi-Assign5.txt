@@ -1,0 +1,155 @@
+Question 1
+Output:
+╭────────────────╮
+│ quantityOnHand │
+╞════════════════╡
+│            100 │
+╰────────────────╯
+Explanation: I find items whose descriptions contain antibiotic and read their quantity on hand, which records the containers currently available.
+
+Question 2
+Output:
+╭───────────────╮
+│ volunteerName │
+╞═══════════════╡
+│ Gene Lewin    │
+╰───────────────╯
+Explanation: I keep volunteers with a known phone number that does not begin with 2 and exclude names ending in Jones. Missing phone numbers do not qualify.
+
+Question 3
+Output:
+╭───────────────╮
+│ volunteerName │
+╞═══════════════╡
+│ George Brewer │
+╰───────────────╯
+Explanation: I follow volunteer assignments to their task types and keep volunteers assigned to transporting tasks. I interpret working on as assigned to the task, including assignments whose start time is still missing.
+
+Question 4
+Output:
+╭────────────────────────────────╮
+│        taskDescription         │
+╞════════════════════════════════╡
+│ Prepare 100 food packages      │
+│ Take packages to the warehouse │
+╰────────────────────────────────╯
+Explanation: I retain every task while looking for matching assignments, then select the tasks with no volunteer match.
+
+Question 5
+Output:
+╭─────────────────╮
+│ packageTypeName │
+╞═════════════════╡
+│ food and water  │
+╰─────────────────╯
+Explanation: I connect package types to the actual items inside their packages and keep types containing an item described as a bottle. Each type appears once.
+
+Question 6
+Output:
+╭───────────────────────╮
+│    itemDescription    │
+╞═══════════════════════╡
+│ bottle of antibiotics │
+│ bottle of aspirin     │
+│ flashlight            │
+│ pack of bandages      │
+╰───────────────────────╯
+Explanation: I look for items without any matching package contents record, so only items never packed are returned.
+
+Question 7
+Output:
+╭────────────────────────────────╮
+│        taskDescription         │
+╞════════════════════════════════╡
+│ Prepare 20 children's packages │
+│ Prepare 100 water packages     │
+│ Prepare 5,000 packages         │
+╰────────────────────────────────╯
+Explanation: I match assigned tasks to volunteer addresses and keep addresses containing the NJ state abbreviation. Repeated task descriptions appear only once.
+
+Question 8
+Output:
+╭───────────────╮
+│ volunteerName │
+╞═══════════════╡
+│ Joan Simmons  │
+│ Chris Jordan  │
+╰───────────────╯
+Explanation: I select assignments that started on or after January 1, 2021, and before July 1, 2021. These conditions include the entire first half of 2021, and each matching volunteer appears once.
+
+Question 9
+Output:
+╭───────────────╮
+│ volunteerName │
+╞═══════════════╡
+│ Julie White   │
+│ Gerry Banks   │
+╰───────────────╯
+Explanation: I connect volunteers to their assigned tasks, then follow the packages produced by those tasks to their contents. I keep volunteers whose tasks produced packages containing spam. Multiple matching packages do not repeat a name.
+
+Question 10
+Output:
+╭─────────────────╮
+│ itemDescription │
+╞═════════════════╡
+│ Baby formula    │
+╰─────────────────╯
+Explanation: For each item in a package, I multiply its unit value by the quantity of that item in that package. I return items whose contribution in at least one package is exactly $100.
+
+Question 11
+Output: 
+╭────────────────┬──────────────────────╮
+│ taskStatusName │ COUNT(DISTINCT a.... │
+╞════════════════╪══════════════════════╡
+│ open           │                    4 │
+│ closed         │                    3 │
+│ ongoing        │                    2 │
+│ pending        │                    1 │
+╰────────────────┴──────────────────────╯
+Explanation: I group assignments by task status and count different volunteers in each group. Someone with two tasks of the same status counts once in that status. Left joins preserve statuses with no volunteers, and the largest counts appear first.
+
+Question 12
+Output:
+╭──────────┬────────────────────╮
+│ taskCode │ SUM(packageWeight) │
+╞══════════╪════════════════════╡
+│      106 │              308.0 │
+╰──────────┴────────────────────╯
+Explanation: I add all package weights for each task, sort the totals from heaviest to lightest, and return the first task. This uses no subqueries; the supplied data has one heaviest task.
+
+Question 13
+Output:
+╭──────────╮
+│ COUNT(*) │
+╞══════════╡
+│        3 │
+╰──────────╯
+Explanation: I connect tasks to their type names, exclude packing tasks, and count the remaining task records.
+
+Question 14
+Output:
+╭─────────────────╮
+│ itemDescription │
+╞═════════════════╡
+│ can of spam     │
+│ dried fruit     │
+│ men's coat      │
+│ sleeping bag    │
+│ tent            │
+│ women's coat    │
+╰─────────────────╯
+Explanation: I begin with items actually present in packages and trace those packages to task assignments. I count different volunteers across all tasks containing each item and keep counts below three. A volunteer touching the same item through several packages counts once. Task assignments are the database proxy for who touched an item; a packed item with no assigned volunteers would count as zero.
+
+Question 15
+Output:
+╭───────────┬──────────────────────╮
+│ packageId │ SUM(i.itemValue *... │
+╞═══════════╪══════════════════════╡
+│         6 │                150.0 │
+│         2 │                151.0 │
+│         4 │                350.0 │
+│        10 │                750.0 │
+│         5 │               1420.0 │
+╰───────────┴──────────────────────╯
+Explanation: I multiply each packed item quantity by its unit value and add those amounts for each package. I keep package totals above $100 and sort them from lowest to highest.
+
